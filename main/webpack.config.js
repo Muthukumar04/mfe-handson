@@ -9,10 +9,10 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name : 'container',
+      name : 'main',
       remotes : {
-        app1 : 'app1@https://localhost:8000/remoteEntry.js',
-        app2 : 'app2@https://localhost:8001/remoteEntry.js'
+        App1 : 'app1@http://localhost:8000/remoteEntry.js',
+        App2 : 'app2@http://localhost:8001/remoteEntry.js'
       },
       shared:packageJson.dependencies
     }),
