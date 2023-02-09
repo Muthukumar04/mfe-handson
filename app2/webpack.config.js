@@ -1,12 +1,21 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-
+const {ModuleFederationPlugin} = require('webpack').container
+const packageJson = require('./package.json')
 module.exports = {
   output: {
     path: path.join(__dirname, "/dist"), // the bundle output path
-    filename: "bundle.js", // the name of the bundle
+    filename: "app2.js", // the name of the bundle
   },
   plugins: [
+    new ModuleFederationPlugin({
+        name : 'app2',
+        filename:'remoteEntry.js',
+        exposes : {
+          './App2' : './src/App.js'
+        },
+        shared: packageJson.dependencies
+    }),
     new HtmlWebpackPlugin({
       template: "src/index.html", // to import index.html file inside index.js
     }),
